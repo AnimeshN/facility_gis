@@ -26,6 +26,7 @@ SECRET_KEY = '53rfbzr85mvqt8x-t51cawntzn_4&m-%wzwt$&no9d)dhnxw1*'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+WAGTAIL_SITE_NAME = 'communityGIS Site'
 
 
 # Application definition
@@ -38,6 +39,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard.apps.DashboardConfig',
+
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+
+    'modelcluster',
+    'taggit',
+
+    'fgis_map.apps.FgisMapConfig',
+    'fgis_cms.apps.FgisCmsConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +67,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'basic.urls'
@@ -120,9 +142,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
-
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
